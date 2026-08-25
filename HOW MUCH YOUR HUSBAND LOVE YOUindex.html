@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How much your husband loves you</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe5ec, #ffb3c6);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #4a0e17;
+            overflow-x: hidden;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            color: #ff4d6d;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ffb3c6;
+            border-radius: 25px;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #ff4d6d;
+        }
+        button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #ff758f;
+        }
+        #resultSection {
+            display: none;
+            margin-top: 25px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .couple-photo {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 15px;
+            border: 5px solid #ffb3c6;
+            margin: 15px 0;
+        }
+        .love-message {
+            font-size: 22px;
+            font-weight: bold;
+            color: #c9184a;
+            margin-top: 15px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>How much your husband loves you? ❤️</h1>
+    
+    <!-- Input Form -->
+    <div id="formSection">
+        <input type="text" id="userName" placeholder="Enter Your Name" required>
+        <input type="tel" id="userMobile" placeholder="Enter Mobile Number" required>
+        <button onclick="revealLove()">Check Now</button>
+    </div>
+
+    <!-- Hidden Result Section -->
+    <div id="resultSection">
+        <h2 id="displayName"></h2>
+        <!-- Ensure your photo name matches 'couple.jpg' exactly -->
+        <img src="couple.jpg" alt="Ankit and Wife" class="couple-photo">
+        <div class="love-message">Ankit loves you more then his life 💕</div>
+    </div>
+</div>
+
+<script>
+    function revealLove() {
+        const name = document.getElementById('userName').value.trim();
+        const mobile = document.getElementById('userMobile').value.trim();
+
+        if (name === "" || mobile === "") {
+            alert("Please fill in both fields first!");
+            return;
+        }
+
+        // Hide form and show result
+        document.getElementById('formSection').style.display = 'none';
+        document.getElementById('displayName').innerText = "Hello " + name + "!";
+        document.getElementById('resultSection').style.display = 'block';
+        
+        // Start generating falling hearts
+        setInterval(createHeart, 300);
+    }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.style.position = 'fixed';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '-20px';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        heart.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear forwards';
+        heart.style.zIndex = '1';
+        heart.style.pointerEvents = 'none';
+        
+        document.body.appendChild(heart);
+        
+        // Remove hearts after they fall off-screen to prevent slowdowns
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+</script>
+
+</body>
+</html>
